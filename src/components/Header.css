@@ -27,15 +27,15 @@
   transform: translateX(-50%);
   background: none;
   border: 1px solid var(--color-text);
-  border-radius: 20px;
+  border-radius: 15px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--color-text);
   text-transform: lowercase;
   letter-spacing: 0.5px;
   transition: all 0.2s ease;
-  padding: 6px 12px;
+  padding: 4px 10px;
 }
 
 .theme-toggle:hover {
@@ -96,6 +96,9 @@
     align-self: center;
     margin: 10px 0;
     top: auto;
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border-radius: 12px;
   }
   
   .theme-toggle:hover {
@@ -118,6 +121,12 @@
   .site-header {
     padding: 15px 20px;
     margin-bottom: 15px;
+  }
+  
+  .theme-toggle {
+    font-size: 0.55rem;
+    padding: 2px 6px;
+    border-radius: 10px;
   }
   
   .site-nav {
