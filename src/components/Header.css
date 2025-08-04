@@ -5,17 +5,42 @@
   align-items: flex-start;
   width: 100%;
   max-width: 1750px;
-  margin: 0 auto 40px auto;
+  margin: 0 auto 0px auto;
   padding: 40px 50px;
-  border: 1px solid #ddd;
   flex-wrap: wrap;
   gap: 20px;
+  position: relative;
 }
 
 .brand-name {
   font-size: 1.2rem;
   font-weight: 600;
   flex-shrink: 0;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.theme-toggle {
+  position: absolute;
+  left: 50%;
+  top: 40px;
+  transform: translateX(-50%);
+  background: none;
+  border: 1px solid var(--color-text);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  padding: 6px 12px;
+}
+
+.theme-toggle:hover {
+  opacity: 0.7;
+  transform: translateX(-50%) scale(1.05);
 }
 
 .site-nav {
@@ -28,18 +53,18 @@
 }
 
 .site-nav a {
-  color: #555;
+  color: var(--color-text-muted);
   transition: color 0.2s ease-in-out;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .site-nav a:hover {
-  color: #007bff;
+  color: var(--color-accent);
 }
 
 .site-nav a.active {
-  color: #007bff;
+  color: var(--color-accent);
   font-weight: 600;
 }
 
@@ -48,6 +73,10 @@
   .site-header {
     max-width: 95%;
     padding: 30px 40px;
+  }
+  
+  .theme-toggle {
+    top: 30px;
   }
 }
 
@@ -59,6 +88,18 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
+  }
+  
+  .theme-toggle {
+    position: static;
+    transform: none;
+    align-self: center;
+    margin: 10px 0;
+    top: auto;
+  }
+  
+  .theme-toggle:hover {
+    transform: scale(1.05);
   }
   
   .site-nav {

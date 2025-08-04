@@ -12,11 +12,11 @@
   max-width: 1750px;
   margin: 0 auto;
   padding: 40px 50px;
-  background-color: white;
+  background-color: var(--color-surface);
   min-height: 60vh;
-  border: 1px solid #ddd;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.3s ease;
 }
 
 /* Responsive breakpoints */

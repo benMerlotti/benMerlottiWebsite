@@ -9,7 +9,14 @@
   margin-bottom: 30px;
   font-size: 2rem;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text);
+}
+
+.about-text {
+  width: 50%;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--color-text);
 }
 
 /* Home Page Styles */
@@ -27,9 +34,22 @@
 .home-title {
   font-size: 4rem;
   font-weight: 300;
-  color: #333;
+  color: var(--color-text);
   margin: 0;
   letter-spacing: 0.1em;
+}
+
+/* No Results Message */
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.no-results p {
+  margin: 0;
+  font-size: 1.1rem;
 }
 
 /* Video Grid Layout */
@@ -43,11 +63,11 @@
 .video-item {
   display: flex;
   flex-direction: column;
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .video-item:hover {
@@ -81,8 +101,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa;
-  color: #6c757d;
+  background: var(--color-card-bg);
+  color: var(--color-text-muted);
   font-size: 0.9rem;
 }
 
@@ -98,14 +118,14 @@
   margin: 0 0 10px 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text);
   line-height: 1.3;
 }
 
 .credits {
   margin: 0;
   font-size: 0.85rem;
-  color: #6c757d;
+  color: var(--color-text-muted);
   font-style: italic;
 }
 

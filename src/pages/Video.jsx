@@ -1,69 +1,61 @@
 // src/pages/Video.jsx
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { projects } from '../data/projects';
+import ProjectVideoItem from './ProjectVideoItem';
+import CreditFilter from '../components/CreditFilter';
 import './PageStyles.css';
 
 const Video = () => {
-  const videoProjects = projects.filter(p => p.category === 'shoot' || p.category === 'edit');
+  const [selectedCredits, setSelectedCredits] = useState([]);
+  
+  // Filter the projects to show video-related categories
+  const allVideoProjects = projects.filter(p => 
+    ['product-video', 'digital-ad', 'film', 'music-video', 'social-media'].includes(p.category)
+  );
+  
+  // Filter projects based on selected credits
+  const filteredProjects = useMemo(() => {
+    if (selectedCredits.length === 0) {
+      return allVideoProjects;
+    }
+    
+    return allVideoProjects.filter(project => {
+      const projectCredits = project.credits || [];
+      return selectedCredits.every(credit => projectCredits.includes(credit));
+    });
+  }, [allVideoProjects, selectedCredits]);
 
-  // Function to convert YouTube URL to embed URL
-  const getYouTubeEmbedUrl = (url) => {
-    if (!url) return null;
-    
-    // Handle different YouTube URL formats
-    let videoId;
-    if (url.includes('youtu.be/')) {
-      videoId = url.split('youtu.be/')[1];
-    } else if (url.includes('youtube.com/watch?v=')) {
-      videoId = url.split('v=')[1];
-    } else if (url.includes('youtube.com/embed/')) {
-      videoId = url.split('embed/')[1];
-    }
-    
-    // Remove any additional parameters
-    if (videoId && videoId.includes('&')) {
-      videoId = videoId.split('&')[0];
-    }
-    
-    return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+  const handleCreditToggle = (credit) => {
+    setSelectedCredits(prev => {
+      if (prev.includes(credit)) {
+        return prev.filter(c => c !== credit);
+      } else {
+        return [...prev, credit];
+      }
+    });
   };
 
   return (
     <div className="page-content">
-      <h1>Edit & Shoot</h1>
+      <h1>Edit | Shoot | Direct</h1>
+      
+      <CreditFilter 
+        projects={allVideoProjects}
+        selectedCredits={selectedCredits}
+        onCreditToggle={handleCreditToggle}
+      />
+      
       <div className="video-grid">
-        {videoProjects.map(project => {
-          const embedUrl = getYouTubeEmbedUrl(project.youtubeUrl);
-          
-          return (
-            <div key={project.id} className="video-item">
-              <div className="video-container">
-                {embedUrl ? (
-                  <iframe
-                    src={embedUrl}
-                    title={project.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                ) : (
-                  <div className="video-placeholder">
-                    <p>Video not available</p>
-                  </div>
-                )}
-              </div>
-              <div className="video-info">
-                <h3>{project.title}</h3>
-                {project.credits && (
-                  <p className="credits">
-                    {project.credits.join(', ')}
-                  </p>
-                )}
-              </div>
-            </div>
-          );
-        })}
+        {filteredProjects.map(project => (
+          <ProjectVideoItem key={project.id} project={project} />
+        ))}
       </div>
+      
+      {filteredProjects.length === 0 && selectedCredits.length > 0 && (
+        <div className="no-results">
+          <p>No projects found with the selected credits.</p>
+        </div>
+      )}
     </div>
   );
 };
