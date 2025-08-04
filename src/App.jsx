@@ -1,5 +1,5 @@
 // src/App.jsx
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -8,22 +8,39 @@ import Vfx3D from './pages/Vfx3D';
 import Dev from './pages/Dev';
 import Video from './pages/Video';
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />
+      },
+      {
+        path: "about",
+        element: <About />
+      },
+      {
+        path: "edit-shoot",
+        element: <Video />
+      },
+      {
+        path: "vfx-3d",
+        element: <Vfx3D />
+      },
+      {
+        path: "dev",
+        element: <Dev />
+      }
+    ]
+  }
+]);
+
 function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            {/* Home page as the default */}
-            <Route index element={<Home />} />
-            
-            <Route path="about" element={<About />} />
-            <Route path="edit-shoot" element={<Video />} />
-            <Route path="vfx-3d" element={<Vfx3D />} />
-            <Route path="dev" element={<Dev />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
