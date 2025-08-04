@@ -222,6 +222,11 @@
     margin-bottom: 20px;
   }
   
+  .about-text {
+    width: 80%;
+    font-size: 1.1rem;
+  }
+  
   .video-info {
     padding: 15px;
   }
@@ -255,6 +260,11 @@
   
   .page-content h1 {
     font-size: 1.3rem;
+  }
+  
+  .about-text {
+    width: 95%;
+    font-size: 1rem;
   }
   
   .dev-project-item {
