@@ -1,0 +1,90 @@
+/* src/components/Header.css */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1750px;
+  margin: 0 auto 40px auto;
+  padding: 40px 50px;
+  border: 1px solid #ddd;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.brand-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.site-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.site-nav a {
+  color: #555;
+  transition: color 0.2s ease-in-out;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav a:hover {
+  color: #007bff;
+}
+
+.site-nav a.active {
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  .site-header {
+    max-width: 95%;
+    padding: 30px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    max-width: 100%;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .site-nav {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .brand-name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+  }
+  
+  .site-nav {
+    gap: 15px;
+    font-size: 0.85rem;
+  }
+  
+  .brand-name {
+    font-size: 1rem;
+  }
+}
