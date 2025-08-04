@@ -17,7 +17,7 @@ const Header = () => {
       
       <nav className="site-nav">
         <NavLink to="/about">About</NavLink>
-        <NavLink to="/edit-shoot">Edit & Shoot</NavLink>
+        <NavLink to="/edit-shoot">Director | DP | Editor</NavLink>
         <NavLink to="/vfx-3d">VFX & 3D</NavLink>
         <NavLink to="/dev">Dev</NavLink>
       </nav>

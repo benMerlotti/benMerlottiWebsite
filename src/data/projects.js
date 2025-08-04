@@ -172,14 +172,41 @@ export const projects = [
     id: 'dev-01', 
     title: 'MOTO BANDIT - Website', 
     category: 'dev', 
-    description: 'A full-stack e-commerce solution for a motorcycle gear brand.',
-    gitUrl: 'https://github.com/your-username/your-repo'
+    description: 'A webiste I designed and built for my band MOTO BANDIT',
+    tech: ['React', 'Shopify API', 'JavaScript', 'CSS3', 'Vite', 'React Router', 'GitHub Pages'],
+    gitUrl: 'https://github.com/MOTOBANDITO/motoWebsite',
+    websiteUrl: 'https://motobandit.net'
   },
   { 
     id: 'dev-02', 
     title: 'Automated Job Scraper and Notifier', 
     category: 'dev', 
-    description: 'A Python script that scrapes job boards and sends email alerts.',
-    gitUrl: 'https://github.com/your-username/your-repo'
+    description: 'A web scraping project I built that scrapes a job board website for new job listings and sends me an email with the new listings.',
+    tech: ['Python', 'BeautifulSoup', 'Requests', 'SQLite', 'smtplib'],
+    gitUrl: 'https://github.com/benMerlotti/job_board_web_scraper'
+  },
+  { 
+    id: 'dev-03', 
+    title: 'Druid Productions - Video Sales Portal', 
+    category: 'dev', 
+    description: 'A video clip storefront for my friend\'s production company. Clients can preview and (eventually) purchase clips, all hosted via AWS.',
+    tech: ['Python', 'Flask', 'React', 'AWS S3', 'AWS IAM', 'Boto3'],
+    gitUrl: 'https://github.com/benMerlotti/Druid_ClipMarketplace'
+  },
+  { 
+    id: 'dev-04', 
+    title: 'Machine Learning Movie Recommender', 
+    category: 'dev', 
+    description: 'Used TMDB data to build a movie recommender. A starter project to learn data wrangling and ML with scikit-learn.',
+    tech: ['Python', 'scikit-learn', 'requests', 'JSON', 'TMDB API'],
+    gitUrl: 'https://github.com/benMerlotti/Movie-Tv-Recommender'
+  },
+  { 
+    id: 'dev-05', 
+    title: 'Tequio - Business Ops Manager', 
+    category: 'dev', 
+    description: 'Bootcamp capstone. A custom inventory + sales tracker for my friends’ tequila brand.',
+    tech: ['React', 'Reactstrap', '.NET', 'EntityFramework', 'SQL Server'],
+    gitUrl: 'https://github.com/benMerlotti/TequioDemoTrack_Capstone'
   },
 ];

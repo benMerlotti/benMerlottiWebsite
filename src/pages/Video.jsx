@@ -37,7 +37,7 @@ const Video = () => {
 
   return (
     <div className="page-content">
-      <h1>Edit | Shoot | Direct</h1>
+      <h1>Director | DP | Editor</h1>
       
       <CreditFilter 
         projects={allVideoProjects}
