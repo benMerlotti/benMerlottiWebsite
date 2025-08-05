@@ -10,7 +10,7 @@ const Video = () => {
   
   // Filter the projects to show video-related categories
   const allVideoProjects = projects.filter(p => 
-    ['product-video', 'digital-ad', 'film', 'music-video', 'social-media'].includes(p.category)
+    ['product-video', 'digital-ad', 'film', 'music-video', 'social-media', 'trailer'].includes(p.category)
   );
   
   // Filter projects based on selected credits

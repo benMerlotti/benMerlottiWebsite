@@ -108,7 +108,7 @@ export const projects = [
     title: 'Netflix - Island of the Seawolves (Trailer)',
     projectType: 'trailer', 
     category: 'trailer',
-    credits: ['Writer', 'Director', 'Cinematographer', 'Editor', 'VFX'],
+    credits: ['Editor'],
     thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Malco+Eagle+Grip+Product+Launch',
     youtubeUrlUrl: 'https://youtu.be/ZcJsTyhxUIY?si=DW3jmdYbQDX-OHK-'
   },
