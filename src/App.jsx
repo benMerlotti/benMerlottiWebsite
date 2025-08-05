@@ -36,10 +36,7 @@ const router = createBrowserRouter(
         }
       ]
     }
-  ],
-  {
-    basename: "/benMerlottiWebsite", 
-  }
+  ]
 );
 
 function App() {

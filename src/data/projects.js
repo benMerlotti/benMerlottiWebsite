@@ -86,34 +86,7 @@ export const projects = [
 
   // Edit, Shoot, Direct Projects
   { 
-    id: 'shoot-01', 
-    title: 'Anything Helps - Nashville 48 Hour Film Festival', 
-    projectType: 'film', 
-    category: 'film', 
-    credits: ['Director', 'Cinematographer', 'Editor', 'Colorist'],
-    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Shoot+Project+1',
-    youtubeUrl: 'https://youtu.be/-Sh0WbnXA1k' 
-  },
-  { 
-    id: 'shoot-02', 
-    title: 'Jesop - I Still See You (Official Music Video)', 
-    projectType: 'music', 
-    category: 'music-video', 
-    credits: ['Director', 'Cinematographer', 'Editor', 'Colorist'],
-    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Edit+Project+2',
-    youtubeUrl: 'https://youtu.be/f90xns2MsUU' 
-  },
-  { 
-    id: 'shoot-03',
-    title: 'Bearded Iris - Attention Please',
-    projectType: 'product', 
-    category: 'product-video',
-    credits: ['Director', 'Cinematographer', 'Editor'],
-    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Bearded+Iris+Attention+Please',
-    vimeoUrl: 'https://vimeo.com/756531376?fl=pl&fe=sh'
-  },
-  { 
-    id: 'shoot-04',
+    id: 'shoot-01',
     title: 'Tequio - Product Launch',
     projectType: 'product', 
     category: 'product-video',
@@ -122,25 +95,7 @@ export const projects = [
     vimeoUrl: 'https://vimeo.com/805763819?fl=pl&fe=sh'
   },
   { 
-    id: 'shoot-05',
-    title: 'Diskin Cider - Tiki Tonik',
-    projectType: 'product', 
-    category: 'product-video',
-    credits: ['Director', 'Cinematographer', 'Editor', 'VFX'],
-    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Tequio+Product+Launch',
-    vimeoUrl: 'https://vimeo.com/756531577'
-  },
-  { 
-    id: 'shoot-06',
-    title: 'Walker Brothers - High Gravity Kombucha',
-    projectType: 'product', 
-    category: 'product-video',
-    credits: ['Director', 'Cinematographer', 'Editor', 'VFX'],
-    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Tequio+Product+Launch',
-    vimeoUrl: 'https://vimeo.com/756531651'
-  },
-  { 
-    id: 'shoot-07',
+    id: 'shoot-02',
     title: 'Malco - Eagle Grip Product Launch',
     projectType: 'product', 
     category: 'product-video',
@@ -149,7 +104,61 @@ export const projects = [
     vimeoUrl: 'https://vimeo.com/756532204?fl=pl&fe=sh'
   },
   { 
+    id: 'shoot-03',
+    title: 'Netflix - Island of the Seawolves (Trailer)',
+    projectType: 'trailer', 
+    category: 'trailer',
+    credits: ['Writer', 'Director', 'Cinematographer', 'Editor', 'VFX'],
+    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Malco+Eagle+Grip+Product+Launch',
+    vimeoUrl: 'https://youtu.be/ZcJsTyhxUIY?si=DW3jmdYbQDX-OHK-'
+  },
+  { 
+    id: 'shoot-04', 
+    title: 'Anything Helps - Nashville 48 Hour Film Festival', 
+    projectType: 'film', 
+    category: 'film', 
+    credits: ['Director', 'Cinematographer', 'Editor', 'Colorist'],
+    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Shoot+Project+1',
+    youtubeUrl: 'https://youtu.be/-Sh0WbnXA1k' 
+  },
+  { 
+    id: 'shoot-05', 
+    title: 'Jesop - I Still See You (Official Music Video)', 
+    projectType: 'music', 
+    category: 'music-video', 
+    credits: ['Director', 'Cinematographer', 'Editor', 'Colorist'],
+    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Edit+Project+2',
+    youtubeUrl: 'https://youtu.be/f90xns2MsUU' 
+  },
+  { 
+    id: 'shoot-06',
+    title: 'Bearded Iris - Attention Please',
+    projectType: 'product', 
+    category: 'product-video',
+    credits: ['Director', 'Cinematographer', 'Editor'],
+    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Bearded+Iris+Attention+Please',
+    vimeoUrl: 'https://vimeo.com/756531376?fl=pl&fe=sh'
+  },
+  { 
+    id: 'shoot-07',
+    title: 'Diskin Cider - Tiki Tonik',
+    projectType: 'product', 
+    category: 'product-video',
+    credits: ['Director', 'Cinematographer', 'Editor', 'VFX'],
+    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Tequio+Product+Launch',
+    vimeoUrl: 'https://vimeo.com/756531577'
+  },
+  { 
     id: 'shoot-08',
+    title: 'Walker Brothers - High Gravity Kombucha',
+    projectType: 'product', 
+    category: 'product-video',
+    credits: ['Director', 'Cinematographer', 'Editor', 'VFX'],
+    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Tequio+Product+Launch',
+    vimeoUrl: 'https://vimeo.com/756531651'
+  },
+  { 
+    id: 'shoot-09',
     title: 'Cave Mode Shake - Good Girl',
     projectType: 'music', 
     category: 'music-video',
@@ -158,7 +167,7 @@ export const projects = [
     vimeoUrl: 'https://vimeo.com/378931752'
   },
   { 
-    id: 'shoot-09',
+    id: 'shoot-10',
     title: 'Cave Mode Shake - Between Lines',
     projectType: 'music', 
     category: 'music-video',
