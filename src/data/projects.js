@@ -110,7 +110,7 @@ export const projects = [
     category: 'trailer',
     credits: ['Writer', 'Director', 'Cinematographer', 'Editor', 'VFX'],
     thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Malco+Eagle+Grip+Product+Launch',
-    vimeoUrl: 'https://youtu.be/ZcJsTyhxUIY?si=DW3jmdYbQDX-OHK-'
+    youtubeUrlUrl: 'https://youtu.be/ZcJsTyhxUIY?si=DW3jmdYbQDX-OHK-'
   },
   { 
     id: 'shoot-04', 
