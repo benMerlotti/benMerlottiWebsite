@@ -1,6 +1,14 @@
 // src/data/projects.js
 export const projects = [
   // VFX & 3D Projects
+  {
+    id: 'reel-01',
+    title: 'Reel',
+    projectType: 'reel',
+    category: 'reel',
+    thumbnailUrl: 'https://via.placeholder.com/400x225/111/fff?text=Reel',
+    vimeoUrl: 'https://vimeo.com/900269476'
+  },
   { 
     id: 'vfx-01', 
     title: 'Weezer - Pinkerton Album Art Extension & Visualizer',
@@ -109,8 +117,8 @@ export const projects = [
     projectType: 'trailer', 
     category: 'trailer',
     credits: ['Editor'],
-    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Malco+Eagle+Grip+Product+Launch',
-    youtubeUrlUrl: 'https://youtu.be/ZcJsTyhxUIY?si=DW3jmdYbQDX-OHK-'
+    thumbnailUrl: 'https://via.placeholder.com/400x225/333/fff?text=Netflix+Trailer',
+    youtubeUrl: 'https://youtu.be/ZcJsTyhxUIY?si=DW3jmdYbQDX-OHK-'
   },
   { 
     id: 'shoot-04', 

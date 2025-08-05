@@ -7,6 +7,7 @@ import About from './pages/About';
 import Vfx3D from './pages/Vfx3D';
 import Dev from './pages/Dev';
 import Video from './pages/Video';
+import Reel from './pages/Reel';
 
 const router = createBrowserRouter(
   [
@@ -33,6 +34,10 @@ const router = createBrowserRouter(
         {
           path: "dev",
           element: <Dev />
+        },
+        {
+          path: "reel",
+          element: <Reel />
         }
       ]
     }

@@ -206,6 +206,28 @@
   font-style: italic;
 }
 
+/* Reel Page Styles */
+.reel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.reel-video-container {
+  width: 100%;
+  max-width: 95vw;
+  height: 80vh;
+  max-height: 800px;
+}
+
+.reel-video-container iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .home-title {
@@ -269,5 +291,14 @@
   
   .dev-project-item {
     padding: 12px;
+  }
+  
+  .reel-video-container {
+    height: 30vh;
+    max-width: 98vw;
+  }
+  
+  .reel-container {
+    padding: 0.5rem;
   }
 }
