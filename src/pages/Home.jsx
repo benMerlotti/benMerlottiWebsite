@@ -3,21 +3,16 @@ import React from 'react';
 import './PageStyles.css';
 
 const Home = () => {
-  const asciiArt = `                                                  
- ▄▄    ▄▄  ▄▄▄▄▄▄▄▄  ▄▄        ▄▄          ▄▄▄▄   
- ██    ██  ██▀▀▀▀▀▀  ██        ██         ██▀▀██  
- ██    ██  ██        ██        ██        ██    ██ 
- ████████  ███████   ██        ██        ██    ██ 
- ██    ██  ██        ██        ██        ██    ██ 
- ██    ██  ██▄▄▄▄▄▄  ██▄▄▄▄▄▄  ██▄▄▄▄▄▄   ██▄▄██  
- ▀▀    ▀▀  ▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀    ▀▀▀▀   
-                                                  
-                                                  `;
-
+  const text = 'ⒽⒺⓁⓁⓄ';
+  
   return (
     <div className="page-content home-page">
       <div className="home-content">
-        <pre className="home-ascii">{asciiArt}</pre>
+        <h1 className="home-hello">
+          {text.split('').map((char, index) => (
+            <span key={index} className="home-hello-char">{char}</span>
+          ))}
+        </h1>
       </div>
     </div>
   );
