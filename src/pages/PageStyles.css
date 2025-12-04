@@ -29,14 +29,84 @@
 
 .home-content {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.home-title {
-  font-size: 4rem;
-  font-weight: 300;
+.home-ascii {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.2rem;
+  line-height: 1.2;
   color: var(--color-text);
   margin: 0;
-  letter-spacing: 0.1em;
+  white-space: pre;
+  letter-spacing: 0;
+}
+
+.home-title-container {
+  width: 100%;
+  min-height: 1.5em; /* Match line-height to prevent layout shift */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3D Cube Container */
+.cube-container {
+  perspective: 1200px;
+  perspective-origin: center center;
+  width: 100%;
+  min-height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cube {
+  position: relative;
+  width: 100%;
+  height: 1.5em;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cube-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.cube-face-front {
+  transform: translateZ(2em);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.cube-face-back {
+  transform: translateZ(-2em) rotateX(180deg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.page-content .home-content .home-title,
+.home-content .home-title,
+.home-title {
+  font-size: 6rem !important;
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.5;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
 }
 
 /* No Results Message */
@@ -230,8 +300,14 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .home-title-container {
+    min-height: 1.5em;
+  }
+  
+  .page-content .home-content .home-title,
+  .home-content .home-title,
   .home-title {
-    font-size: 2.5rem;
+    font-size: 3.5rem !important;
   }
   
   .video-grid {
@@ -268,8 +344,14 @@
 }
 
 @media (max-width: 480px) {
+  .home-title-container {
+    min-height: 1.5em;
+  }
+  
+  .page-content .home-content .home-title,
+  .home-content .home-title,
   .home-title {
-    font-size: 2rem;
+    font-size: 2.5rem !important;
   }
   
   .video-grid {

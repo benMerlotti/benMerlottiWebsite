@@ -7,7 +7,6 @@ import profileImage from "../assets/profileImage.jpg";
 const About = () => {
   return (
     <div className="page-content">
-      <h1>About</h1>
       <div className="about-text">
         <p>
           Ben Merlotti is a multidisciplinary creative professional specializing
