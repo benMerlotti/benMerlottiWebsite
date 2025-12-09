@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import './PageStyles.css';
-import promoVideo from '../assets/VHS KARAOKE PROMO.mp4';
-import tutorialVideo from '../assets/VHS KARAOKE TUTORIAL.mp4';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
 
@@ -59,7 +57,8 @@ const ProductDetail = () => {
         <h1>VHS KARAOKE TEXT TEMPLATE</h1>
         
         <div className="product-detail-content">
-          <div className="product-videos">
+          {/* Videos can be added back when hosted externally or re-added to the repository */}
+          {/* <div className="product-videos">
             <div className="product-video-section">
               <h3>Promo Video</h3>
               <div className="product-video-container">
@@ -87,7 +86,7 @@ const ProductDetail = () => {
                 </video>
               </div>
             </div>
-          </div>
+          </div> */}
           
           <div className="product-detail-main">
             <div className="product-info">
