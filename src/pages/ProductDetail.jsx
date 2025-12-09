@@ -1,10 +1,7 @@
 // src/pages/ProductDetail.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loadStripe } from '@stripe/stripe-js';
 import './PageStyles.css';
-
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
 
 // YouTube video URLs
 const PROMO_VIDEO_URL = 'https://youtu.be/wduwpI3OFGQ';
@@ -70,25 +67,13 @@ const ProductDetail = () => {
 
       const data = await response.json();
       
-      // Check if sessionId exists
-      if (!data.sessionId) {
-        throw new Error(data.error || 'No session ID received from server');
+      // Check if checkout URL exists
+      if (!data.url) {
+        throw new Error(data.error || 'No checkout URL received from server');
       }
 
-      const stripe = await stripePromise;
-      
-      if (!stripe) {
-        throw new Error('Stripe failed to load. Please refresh the page.');
-      }
-      
-      // Redirect to Stripe Checkout
-      const { error } = await stripe.redirectToCheckout({
-        sessionId: data.sessionId,
-      });
-
-      if (error) {
-        throw new Error(error.message || 'Failed to redirect to checkout');
-      }
+      // Redirect directly to Stripe Checkout
+      window.location.href = data.url;
     } catch (error) {
       console.error('Payment error:', error);
       alert(`Payment Error: ${error.message || 'There was an error processing your payment. Please try again.'}`);
