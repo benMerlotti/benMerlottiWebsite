@@ -36,8 +36,14 @@ const ProductDetail = () => {
   const handlePurchase = async () => {
     setLoading(true);
     try {
+      // Check if Stripe publishable key is set
+      if (!import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY) {
+        alert('Stripe is not configured. Please contact support.');
+        setLoading(false);
+        return;
+      }
+
       // Call your backend API to create a checkout session
-      // Update this URL to match your backend (Vercel: /api/create-checkout-session, Netlify: /.netlify/functions/create-checkout-session)
       const API_URL = import.meta.env.VITE_API_URL || '/api/create-checkout-session';
       const response = await fetch(API_URL, {
         method: 'POST',
@@ -50,22 +56,36 @@ const ProductDetail = () => {
         }),
       });
 
-      const { sessionId } = await response.json();
+      // Check if response is ok
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+        throw new Error(errorData.error || `Server error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      // Check if sessionId exists
+      if (!data.sessionId) {
+        throw new Error(data.error || 'No session ID received from server');
+      }
+
       const stripe = await stripePromise;
+      
+      if (!stripe) {
+        throw new Error('Stripe failed to load. Please refresh the page.');
+      }
       
       // Redirect to Stripe Checkout
       const { error } = await stripe.redirectToCheckout({
-        sessionId,
+        sessionId: data.sessionId,
       });
 
       if (error) {
-        console.error('Error:', error);
-        alert('There was an error processing your payment. Please try again.');
-        setLoading(false);
+        throw new Error(error.message || 'Failed to redirect to checkout');
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('There was an error processing your payment. Please try again.');
+      console.error('Payment error:', error);
+      alert(`Payment Error: ${error.message || 'There was an error processing your payment. Please try again.'}`);
       setLoading(false);
     }
   };
