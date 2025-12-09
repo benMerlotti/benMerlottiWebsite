@@ -9,8 +9,11 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function sendEmail(customerEmail, downloadLink, orderId) {
   try {
+    // Use custom email from env, or fallback to Resend default for testing
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+    
     const { data, error } = await resend.emails.send({
-      from: 'onboarding@resend.dev', // Use this for testing, or update to your verified domain
+      from: fromEmail,
       to: customerEmail,
       subject: 'Your VHS Karaoke Text Template Download',
       html: `
