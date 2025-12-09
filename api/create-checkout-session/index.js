@@ -20,9 +20,8 @@ export default async function handler(req, res) {
     const { productName, price } = req.body;
 
     // Get origin from headers or use a fallback
-    const origin = req.headers.origin || req.headers.host 
-      ? `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}`
-      : 'https://benmerlotti.com';
+    const origin = req.headers.origin 
+      || (req.headers.host ? `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}` : 'http://localhost:3000');
 
     // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
