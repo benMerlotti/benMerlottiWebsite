@@ -18,6 +18,9 @@ dist-ssr
 .env.production
 .env.development
 
+# Large video files (host elsewhere)
+src/assets/*.mp4
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
