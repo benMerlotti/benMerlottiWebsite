@@ -6,6 +6,29 @@ import './PageStyles.css';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
 
+// YouTube video URLs
+const PROMO_VIDEO_URL = 'https://youtu.be/wduwpI3OFGQ';
+const TUTORIAL_VIDEO_URL = 'https://youtu.be/Fv14Drjuo5g';
+
+// Helper function to extract YouTube video ID and create embed URL
+const getYouTubeEmbedUrl = (url) => {
+  if (!url) return null;
+  
+  let videoId;
+  if (url.includes('youtu.be/')) {
+    videoId = url.split('youtu.be/')[1];
+  } else if (url.includes('v=')) {
+    videoId = url.split('v=')[1];
+  } else if (url.includes('youtube.com/watch/')) {
+    videoId = url.split('youtube.com/watch/')[1];
+  }
+  
+  if (videoId && videoId.includes('&')) videoId = videoId.split('&')[0];
+  if (videoId && videoId.includes('?')) videoId = videoId.split('?')[0];
+  
+  return videoId ? `https://www.youtube.com/embed/${videoId}?rel=0&controls=1&modestbranding=1&showinfo=0` : null;
+};
+
 const ProductDetail = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -57,36 +80,39 @@ const ProductDetail = () => {
         <h1>VHS KARAOKE TEXT TEMPLATE</h1>
         
         <div className="product-detail-content">
-          {/* Videos can be added back when hosted externally or re-added to the repository */}
-          {/* <div className="product-videos">
-            <div className="product-video-section">
-              <h3>Promo Video</h3>
-              <div className="product-video-container">
-                <video 
-                  controls 
-                  className="product-video"
-                  preload="metadata"
-                >
-                  <source src={promoVideo} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+          <div className="product-videos">
+            {PROMO_VIDEO_URL && getYouTubeEmbedUrl(PROMO_VIDEO_URL) && (
+              <div className="product-video-section">
+                <h3>Promo Video</h3>
+                <div className="product-video-container">
+                  <iframe
+                    src={getYouTubeEmbedUrl(PROMO_VIDEO_URL)}
+                    title="VHS Karaoke Promo Video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="product-video"
+                  ></iframe>
+                </div>
               </div>
-            </div>
+            )}
             
-            <div className="product-video-section">
-              <h3>Tutorial</h3>
-              <div className="product-video-container">
-                <video 
-                  controls 
-                  className="product-video"
-                  preload="metadata"
-                >
-                  <source src={tutorialVideo} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+            {TUTORIAL_VIDEO_URL && getYouTubeEmbedUrl(TUTORIAL_VIDEO_URL) && (
+              <div className="product-video-section">
+                <h3>Tutorial</h3>
+                <div className="product-video-container">
+                  <iframe
+                    src={getYouTubeEmbedUrl(TUTORIAL_VIDEO_URL)}
+                    title="VHS Karaoke Tutorial Video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="product-video"
+                  ></iframe>
+                </div>
               </div>
-            </div>
-          </div> */}
+            )}
+          </div>
           
           <div className="product-detail-main">
             <div className="product-info">
