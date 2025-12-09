@@ -8,6 +8,9 @@ import Vfx3D from './pages/Vfx3D';
 import Dev from './pages/Dev';
 import Video from './pages/Video';
 import Reel from './pages/Reel';
+import Store from './pages/Store';
+import ProductDetail from './pages/ProductDetail';
+import Success from './pages/Success';
 
 const router = createBrowserRouter(
   [
@@ -38,6 +41,18 @@ const router = createBrowserRouter(
         {
           path: "reel",
           element: <Reel />
+        },
+        {
+          path: "store",
+          element: <Store />
+        },
+        {
+          path: "store/vhs-karaoke-text-template",
+          element: <ProductDetail />
+        },
+        {
+          path: "store/success",
+          element: <Success />
         }
       ]
     }

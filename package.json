@@ -12,10 +12,12 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^8.5.3",
     "framer-motion": "^12.23.25",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.7.1"
+    "react-router-dom": "^7.7.1",
+    "resend": "^6.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
