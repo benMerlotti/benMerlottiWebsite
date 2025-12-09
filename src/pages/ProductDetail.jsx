@@ -58,6 +58,12 @@ const ProductDetail = () => {
 
       // Check if response is ok
       if (!response.ok) {
+        // Handle 404 specifically (API endpoint not found)
+        if (response.status === 404) {
+          throw new Error(
+            'API endpoint not found. Make sure you\'re running with "vercel dev" instead of "npm run dev" to test the payment flow locally.'
+          );
+        }
         const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
         throw new Error(errorData.error || `Server error: ${response.status}`);
       }
