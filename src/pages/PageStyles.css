@@ -430,15 +430,20 @@
 .product-video-container {
   width: 100%;
   position: relative;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
   background: #000;
   border-radius: 8px;
   overflow: hidden;
 }
 
 .product-video {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  border: none;
 }
 
 .product-detail-main {
