@@ -48,26 +48,36 @@ export default async function handler(req, res) {
 
   try {
     // For Vercel serverless functions, we need to read the raw body
-    // The body comes as a string or Buffer, but we need it as a string for signature verification
+    // Vercel automatically parses JSON, so we need to handle both cases
     let rawBody;
     
     if (typeof req.body === 'string') {
+      // Already a string - use as-is
       rawBody = req.body;
     } else if (Buffer.isBuffer(req.body)) {
+      // Buffer - convert to string
       rawBody = req.body.toString('utf8');
     } else if (req.body && typeof req.body === 'object') {
-      // If body was parsed as JSON, we need to reconstruct it exactly as Stripe sent it
-      // This is a fallback - ideally Vercel should give us raw body
+      // Vercel has parsed it as JSON
+      // Stringify it back - this should work if the formatting matches
+      // Note: This might fail if Vercel's parsing changed the format
       rawBody = JSON.stringify(req.body);
     } else {
       throw new Error('Unable to get request body');
     }
     
-    // Verify webhook signature
+    // Try to verify webhook signature
+    // Use the webhook secret from environment (could be from Stripe Dashboard or CLI)
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+    
+    if (!webhookSecret) {
+      throw new Error('STRIPE_WEBHOOK_SECRET is not set');
+    }
+    
     event = stripe.webhooks.constructEvent(
       rawBody,
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET
+      webhookSecret
     );
   } catch (err) {
     console.error('Webhook signature verification failed:', err.message);
