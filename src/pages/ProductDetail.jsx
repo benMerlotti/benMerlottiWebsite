@@ -32,20 +32,29 @@ const ProductDetail = () => {
 
   const handlePurchase = async () => {
     setLoading(true);
+    
+    // Debug: Log environment info immediately
+    console.log('=== STRIPE DEBUG INFO ===');
+    console.log('VITE_STRIPE_PUBLISHABLE_KEY:', import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+    console.log('Key exists?', !!import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+    console.log('Key length:', import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY?.length || 0);
+    console.log('All VITE_ vars:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')));
+    console.log('All env vars:', Object.keys(import.meta.env));
+    console.log('========================');
+    
     try {
       // Check if Stripe publishable key is set
       const stripeKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
-      console.log('Checking Stripe key:', stripeKey ? 'Found (length: ' + stripeKey.length + ')' : 'NOT FOUND');
-      console.log('All VITE_ env vars:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')));
       
       if (!stripeKey || stripeKey.trim() === '') {
-        const errorMsg = 'Stripe is not configured. Please check:\n1. VITE_STRIPE_PUBLISHABLE_KEY is set in Vercel\n2. It is enabled for Production environment\n3. Site has been redeployed after adding the variable\n\nCheck browser console (F12) for details.';
-        console.error('VITE_STRIPE_PUBLISHABLE_KEY is not set or empty');
-        console.log('Available VITE_ env vars:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')));
+        console.error('❌ VITE_STRIPE_PUBLISHABLE_KEY is missing or empty');
+        const errorMsg = 'Stripe is not configured.\n\nPlease:\n1. Check Vercel → Settings → Environment Variables\n2. Verify VITE_STRIPE_PUBLISHABLE_KEY is set for Production\n3. Redeploy after adding the variable\n\nOpen browser console (F12) to see debug info.';
         alert(errorMsg);
         setLoading(false);
         return;
       }
+      
+      console.log('✅ Stripe key found, proceeding with checkout...');
 
       // Call your backend API to create a checkout session
       const API_URL = import.meta.env.VITE_API_URL || '/api/create-checkout-session';
