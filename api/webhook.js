@@ -38,6 +38,20 @@ async function sendEmail(customerEmail, downloadLink, orderId) {
   }
 }
 
+// Helper to get raw body from Vercel request
+async function getRawBody(req) {
+  return new Promise((resolve, reject) => {
+    let data = '';
+    req.on('data', chunk => {
+      data += chunk.toString('utf8');
+    });
+    req.on('end', () => {
+      resolve(data);
+    });
+    req.on('error', reject);
+  });
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
@@ -47,27 +61,29 @@ export default async function handler(req, res) {
   let event;
 
   try {
-    // For Vercel serverless functions, we need to read the raw body
-    // Vercel automatically parses JSON, so we need to handle both cases
+    // Try to get raw body from request stream first
+    // This is the most reliable way for Stripe webhooks
     let rawBody;
     
-    if (typeof req.body === 'string') {
-      // Already a string - use as-is
+    // Check if we can read from the stream (Vercel might have already consumed it)
+    if (req.readable && !req.body) {
+      rawBody = await getRawBody(req);
+    } else if (typeof req.body === 'string') {
+      // Already a string - use as-is (this is ideal)
       rawBody = req.body;
     } else if (Buffer.isBuffer(req.body)) {
       // Buffer - convert to string
       rawBody = req.body.toString('utf8');
     } else if (req.body && typeof req.body === 'object') {
-      // Vercel has parsed it as JSON
-      // Stringify it back - this should work if the formatting matches
-      // Note: This might fail if Vercel's parsing changed the format
+      // Vercel has parsed it as JSON - this is problematic for signature verification
+      // Try to stringify it back, but this might not match exactly
       rawBody = JSON.stringify(req.body);
+      console.warn('Warning: Using stringified body - signature verification may fail if formatting differs');
     } else {
       throw new Error('Unable to get request body');
     }
     
-    // Try to verify webhook signature
-    // Use the webhook secret from environment (could be from Stripe Dashboard or CLI)
+    // Verify webhook signature
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
     
     if (!webhookSecret) {
