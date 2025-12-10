@@ -11,6 +11,7 @@ import Reel from './pages/Reel';
 import Store from './pages/Store';
 import ProductDetail from './pages/ProductDetail';
 import Success from './pages/Success';
+import Contact from './pages/Contact';
 
 const router = createBrowserRouter(
   [
@@ -53,6 +54,10 @@ const router = createBrowserRouter(
         {
           path: "store/success",
           element: <Success />
+        },
+        {
+          path: "contact",
+          element: <Contact />
         }
       ]
     }
