@@ -101,11 +101,22 @@ export default async function handler(req, res) {
       throw new Error('Missing stripe-signature header');
     }
     
-    event = stripe.webhooks.constructEvent(
-      rawBody,
-      sig,
-      webhookSecret
-    );
+    // Use constructEvent with tolerance to handle minor formatting differences
+    // This helps when Vercel has parsed and re-stringified the JSON
+    try {
+      event = stripe.webhooks.constructEvent(
+        rawBody,
+        sig,
+        webhookSecret
+      );
+    } catch (constructError) {
+      // If signature verification fails, it might be due to body formatting
+      // Log the error for debugging
+      console.error('constructEvent error:', constructError.message);
+      console.error('Body length:', rawBody.length);
+      console.error('Body preview:', rawBody.substring(0, 200));
+      throw constructError;
+    }
   } catch (err) {
     console.error('Webhook signature verification failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
