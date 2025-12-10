@@ -59,58 +59,56 @@ const Success = () => {
   if (loading) {
     return (
       <div className="page-content">
-        <div className="success-container">
-          <p>Verifying your payment...</p>
-        </div>
+        <h1>Verifying Payment</h1>
+        <p>Please wait while we verify your payment...</p>
       </div>
     );
   }
 
   return (
     <div className="page-content">
-      <div className="success-container">
-        <div className="success-content">
-          <h1>Payment Successful! 🎉</h1>
-          <p>Thank you for your purchase!</p>
-          
-          {verified && (
-            <>
-              <div className="download-section">
-                <h2>Download Your Template</h2>
-                <p className="success-message">
-                  Click the button below to download your <strong>VHS KARAOKE TEXT TEMPLATE</strong>.
-                </p>
-                <a 
-                  href={DOWNLOAD_LINK} 
-                  className="download-button"
-                  download
-                >
-                  Download Template (110 MB)
-                </a>
-                <p className="download-note">
-                  The download link will remain active. We've also sent it to your email as a backup.
-                  {sessionId && (
-                    <> If you need to access it again, your Order ID is: <strong>{sessionId}</strong></>
-                  )}
-                </p>
-              </div>
-            </>
-          )}
-          
-          {sessionId && (
-            <p className="success-session">
-              Order ID: {sessionId}
+      <h1>Payment Successful</h1>
+      
+      <div className="success-content">
+        <p className="success-message">
+          Thank you for your purchase. Your payment has been processed successfully.
+        </p>
+        
+        {verified && (
+          <div className="download-section">
+            <h2>Download Your Template</h2>
+            <p className="success-message">
+              Click the button below to download your <strong>VHS KARAOKE TEXT TEMPLATE</strong>.
             </p>
-          )}
-          
-          <div className="success-actions">
-            <button className="back-button" onClick={() => navigate('/store')}>
-              Back to Store
-            </button>
-            <button className="back-button" onClick={() => navigate('/')}>
-              Go Home
-            </button>
+            <a 
+              href={DOWNLOAD_LINK} 
+              className="download-button"
+              download
+            >
+              Download Template (110 MB)
+            </a>
+            <p className="download-note">
+              The download link will remain active. We've also sent it to your email as a backup.
+              {sessionId && (
+                <> If you need to access it again, your Order ID is: <strong>{sessionId}</strong></>
+              )}
+            </p>
           </div>
+        )}
+        
+        {sessionId && (
+          <p className="success-session">
+            Order ID: {sessionId}
+          </p>
+        )}
+        
+        <div className="success-actions">
+          <button className="back-button" onClick={() => navigate('/store')}>
+            Back to Store
+          </button>
+          <button className="back-button" onClick={() => navigate('/')}>
+            Go Home
+          </button>
         </div>
       </div>
     </div>

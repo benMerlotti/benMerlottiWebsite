@@ -543,24 +543,11 @@
 }
 
 /* Success Page Styles */
-.success-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  text-align: center;
-}
-
 .success-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.success-content h1 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--color-text);
-  margin: 0;
+  gap: 30px;
+  max-width: 800px;
 }
 
 .success-message {
