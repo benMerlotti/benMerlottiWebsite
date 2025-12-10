@@ -35,10 +35,14 @@ const ProductDetail = () => {
     try {
       // Check if Stripe publishable key is set
       const stripeKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+      console.log('Checking Stripe key:', stripeKey ? 'Found (length: ' + stripeKey.length + ')' : 'NOT FOUND');
+      console.log('All VITE_ env vars:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')));
+      
       if (!stripeKey || stripeKey.trim() === '') {
+        const errorMsg = 'Stripe is not configured. Please check:\n1. VITE_STRIPE_PUBLISHABLE_KEY is set in Vercel\n2. It is enabled for Production environment\n3. Site has been redeployed after adding the variable\n\nCheck browser console (F12) for details.';
         console.error('VITE_STRIPE_PUBLISHABLE_KEY is not set or empty');
-        console.log('Available env vars:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')));
-        alert('Stripe is not configured. The environment variable may not be set or the site needs to be redeployed after adding it.');
+        console.log('Available VITE_ env vars:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')));
+        alert(errorMsg);
         setLoading(false);
         return;
       }
