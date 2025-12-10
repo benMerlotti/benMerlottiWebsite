@@ -38,6 +38,12 @@ async function sendEmail(customerEmail, downloadLink, orderId) {
   }
 }
 
+export const config = {
+  api: {
+    bodyParser: false, // Disable body parsing, we need raw body for Stripe
+  },
+};
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
@@ -47,17 +53,22 @@ export default async function handler(req, res) {
   let event;
 
   try {
-    // For Vercel, we need to get the raw body
-    // If body is already a string (raw), use it; otherwise stringify
-    const body = typeof req.body === 'string' 
-      ? req.body 
-      : Buffer.isBuffer(req.body)
-      ? req.body.toString('utf8')
-      : JSON.stringify(req.body);
+    // Get raw body as string
+    // In Vercel, req.body might be a Buffer or string depending on content-type
+    let rawBody;
+    if (Buffer.isBuffer(req.body)) {
+      rawBody = req.body.toString('utf8');
+    } else if (typeof req.body === 'string') {
+      rawBody = req.body;
+    } else {
+      // If it's already parsed JSON, we need to stringify it back
+      // This shouldn't happen with bodyParser: false, but as fallback
+      rawBody = JSON.stringify(req.body);
+    }
     
     // Verify webhook signature
     event = stripe.webhooks.constructEvent(
-      body,
+      rawBody,
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
