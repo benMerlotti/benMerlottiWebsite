@@ -34,8 +34,11 @@ const ProductDetail = () => {
     setLoading(true);
     try {
       // Check if Stripe publishable key is set
-      if (!import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY) {
-        alert('Stripe is not configured. Please contact support.');
+      const stripeKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+      if (!stripeKey || stripeKey.trim() === '') {
+        console.error('VITE_STRIPE_PUBLISHABLE_KEY is not set or empty');
+        console.log('Available env vars:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')));
+        alert('Stripe is not configured. The environment variable may not be set or the site needs to be redeployed after adding it.');
         setLoading(false);
         return;
       }
