@@ -88,7 +88,6 @@ export default async function handler(req, res) {
       );
     } catch (constructError) {
       // Signature verification failed - this is expected with Vercel's JSON parsing
-      // For now, we'll parse the event manually and skip signature verification
       // WARNING: This is less secure but necessary for Vercel's automatic JSON parsing
       console.warn('Signature verification failed, parsing event manually (less secure)');
       console.warn('Error:', constructError.message);
@@ -96,6 +95,21 @@ export default async function handler(req, res) {
       // Parse the event manually - we lose signature verification but can still process
       if (req.body && req.body.type) {
         event = req.body;
+        
+        // Additional security: Verify the event by fetching it from Stripe API
+        // This ensures the event is legitimate even without signature verification
+        try {
+          const verifiedEvent = await stripe.events.retrieve(event.id);
+          if (!verifiedEvent || verifiedEvent.type !== event.type) {
+            throw new Error('Event verification failed - event does not match Stripe records');
+          }
+          console.log('Event verified via Stripe API:', event.id);
+          // Use the verified event from Stripe
+          event = verifiedEvent;
+        } catch (verifyError) {
+          console.error('Failed to verify event via Stripe API:', verifyError.message);
+          throw new Error('Cannot verify webhook event - signature verification failed and API verification failed');
+        }
       } else {
         throw new Error('Cannot parse webhook event - signature verification failed and body is not a valid event');
       }
