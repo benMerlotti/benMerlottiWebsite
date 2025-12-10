@@ -61,33 +61,44 @@ export default async function handler(req, res) {
   let event;
 
   try {
-    // Try to get raw body from request stream first
-    // This is the most reliable way for Stripe webhooks
+    // For Vercel serverless functions, we need the raw body string
+    // Vercel parses JSON automatically, which breaks Stripe signature verification
     let rawBody;
     
-    // Check if we can read from the stream (Vercel might have already consumed it)
-    if (req.readable && !req.body) {
-      rawBody = await getRawBody(req);
-    } else if (typeof req.body === 'string') {
-      // Already a string - use as-is (this is ideal)
+    // Check for rawBody property (some frameworks provide this)
+    if (req.rawBody && typeof req.rawBody === 'string') {
+      rawBody = req.rawBody;
+    } 
+    // Check if body is already a string (ideal case)
+    else if (typeof req.body === 'string') {
       rawBody = req.body;
-    } else if (Buffer.isBuffer(req.body)) {
-      // Buffer - convert to string
+    } 
+    // Check if body is a Buffer
+    else if (Buffer.isBuffer(req.body)) {
       rawBody = req.body.toString('utf8');
-    } else if (req.body && typeof req.body === 'object') {
-      // Vercel has parsed it as JSON - this is problematic for signature verification
-      // Try to stringify it back, but this might not match exactly
+    } 
+    // If Vercel has parsed it as JSON object, we need to reconstruct it
+    // This is problematic because JSON.stringify might not match Stripe's exact format
+    else if (req.body && typeof req.body === 'object') {
+      // Try to stringify with no spaces to match Stripe's format more closely
       rawBody = JSON.stringify(req.body);
-      console.warn('Warning: Using stringified body - signature verification may fail if formatting differs');
-    } else {
+    } 
+    else {
       throw new Error('Unable to get request body');
     }
+    
+    // Log for debugging (remove in production)
+    console.log('Body type:', typeof req.body, 'Body is object?', typeof req.body === 'object');
     
     // Verify webhook signature
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
     
     if (!webhookSecret) {
       throw new Error('STRIPE_WEBHOOK_SECRET is not set');
+    }
+    
+    if (!sig) {
+      throw new Error('Missing stripe-signature header');
     }
     
     event = stripe.webhooks.constructEvent(
