@@ -69,6 +69,47 @@
   transform: translateY(-10px);
 }
 
+/* Hello Animation Video */
+.hello-container {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+}
+
+.hello-animation-video {
+  /* Match the text size exactly - use the same height as the text */
+  height: .7811em; /* This will match the font-size of .home-hello (12rem) */
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: left center; /* Align to match text baseline */
+  vertical-align: baseline;
+  /* Adjust colors based on theme */
+  transition: filter 0.3s ease;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  /* Position adjustment: proportional to font size (12rem) */
+  /* -10px at 12rem = -10/192 = -0.052em, -7px = -7/192 = -0.036em */
+  transform: translate(-0.052em, 0.036em);
+}
+
+/* Light mode: if animation has white text, invert to dark */
+/* Adjust this based on your animation's original colors */
+.hello-animation-video.light-mode {
+  /* If your animation is white text, use: filter: brightness(0) invert(0); */
+  /* If your animation is dark text, use: filter: none; */
+  filter: none;
+}
+
+/* Dark mode: if animation has dark text, invert to white */
+/* Adjust this based on your animation's original colors */
+.hello-animation-video.dark-mode {
+  /* If your animation is dark text, use: filter: brightness(0) invert(1); */
+  /* If your animation is white text, use: filter: none; */
+  filter: brightness(0) invert(1);
+}
+
 .home-title-container {
   width: 100%;
   min-height: 1.5em; /* Match line-height to prevent layout shift */
