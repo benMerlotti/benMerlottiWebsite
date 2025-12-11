@@ -96,6 +96,22 @@
   background: transparent;
 }
 
+/* Apply same styles to img elements (PNG sequence) */
+.hello-animation-video img,
+img.hello-animation-video {
+  height: .7811em;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+  vertical-align: baseline;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  transform: translate(-0.052em, 0.036em);
+  background: transparent;
+}
+
 /* Light mode: if animation has white text, invert to dark */
 /* Adjust this based on your animation's original colors */
 .hello-animation-video.light-mode {
