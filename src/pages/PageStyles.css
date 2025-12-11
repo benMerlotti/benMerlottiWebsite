@@ -80,7 +80,7 @@
   /* Match the text size exactly - use the same height as the text */
   height: .7811em; /* This will match the font-size of .home-hello (12rem) */
   width: auto;
-  max-width: none;
+  max-width: 100%;
   object-fit: contain;
   object-position: left center; /* Align to match text baseline */
   vertical-align: baseline;
@@ -92,6 +92,8 @@
   /* Position adjustment: proportional to font size (12rem) */
   /* -10px at 12rem = -10/192 = -0.052em, -7px = -7/192 = -0.036em */
   transform: translate(-0.052em, 0.036em);
+  /* Prevent black bars on mobile */
+  background: transparent;
 }
 
 /* Light mode: if animation has white text, invert to dark */
